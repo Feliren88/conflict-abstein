@@ -15,12 +15,15 @@ from translator import AyaTranslator
 log = logging.getLogger(__name__)
 
 
-def load_source(name: str) -> Dataset:
-    ds = load_dataset(f"{config.HUB_ORG}/{name}", split="train")
+def apply_renames(ds: Dataset) -> Dataset:
     for old, new in config.COLUMN_RENAMES.items():
         if old in ds.column_names:
             ds = ds.rename_column(old, new)
     return ds
+
+
+def load_source(name: str) -> Dataset:
+    return apply_renames(load_dataset(f"{config.HUB_ORG}/{name}", split="train"))
 
 
 def text_columns(ds: Dataset) -> list[str]:

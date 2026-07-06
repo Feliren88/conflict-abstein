@@ -1,6 +1,19 @@
+# environments, caches, tooling droppings
 .venv/
 __pycache__/
 *.pyc
+.claude/
+.agent_harnesses.json
+
+# large data artifacts (regenerable, or already on the HF Hub)
 build/
 translation/output/
-translation/run.log
+translation/output_stale/
+
+# logs and runtime state
+*.log
+translation/run.pid
+
+# activation-steering artifacts (large tensors / run outputs)
+infer_and_steering/vectors/
+infer_and_steering/results/
